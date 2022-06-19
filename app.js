@@ -23,7 +23,7 @@ const MongoDBStore = require("connect-mongo")(session);
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp';
 
-mongoose.connect(dbUrl, {
+mongoose.connect(dbUrl,{
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
@@ -76,52 +76,52 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 app.use(flash());
-app.use(helmet());
+//app.use(helmet());
 
 
-const scriptSrcUrls = [
-    "https://stackpath.bootstrapcdn.com",
-    "https://api.tiles.mapbox.com",
-    "https://api.mapbox.com",
-    "https://kit.fontawesome.com",
-    "https://cdnjs.cloudflare.com",
-    "https://cdn.jsdelivr.net",
-];
-const styleSrcUrls = [
-    "https://kit-free.fontawesome.com",
-    "https://stackpath.bootstrapcdn.com",
-    "https://api.mapbox.com",
-    "https://api.tiles.mapbox.com",
-    "https://fonts.googleapis.com",
-    "https://use.fontawesome.com",
-];
-const connectSrcUrls = [
-    "https://api.mapbox.com",
-    "https://*.tiles.mapbox.com",
-    "https://events.mapbox.com",
-];
-const fontSrcUrls = [];
-app.use(
-    helmet.contentSecurityPolicy({
-        directives: {
-            defaultSrc: [],
-            connectSrc: ["'self'", ...connectSrcUrls],
-            scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
-            styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
-            workerSrc: ["'self'", "blob:"],
-            childSrc: ["blob:"],
-            objectSrc: [],
-            imgSrc: [
-                "'self'",
-                "blob:",
-                "data:",
-                "https://res.cloudinary.com/douqbebwk/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! 
-                "https://images.unsplash.com",
-            ],
-            fontSrc: ["'self'", ...fontSrcUrls],
-        },
-    })
-);
+// const scriptSrcUrls = [
+//     "https://stackpath.bootstrapcdn.com",
+//     "https://api.tiles.mapbox.com",
+//     "https://api.mapbox.com",
+//     "https://kit.fontawesome.com",
+//     "https://cdnjs.cloudflare.com",
+//     "https://cdn.jsdelivr.net",
+// ];
+// const styleSrcUrls = [
+//     "https://kit-free.fontawesome.com",
+//     "https://stackpath.bootstrapcdn.com",
+//     "https://api.mapbox.com",
+//     "https://api.tiles.mapbox.com",
+//     "https://fonts.googleapis.com",
+//     "https://use.fontawesome.com",
+// ];
+// const connectSrcUrls = [
+//     "https://api.mapbox.com",
+//     "https://*.tiles.mapbox.com",
+//     "https://events.mapbox.com",
+// ];
+// const fontSrcUrls = [];
+// app.use(
+//     helmet.contentSecurityPolicy({
+//         directives: {
+//             defaultSrc: [],
+//             connectSrc: ["'self'", ...connectSrcUrls],
+//             scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+//             styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+//             workerSrc: ["'self'", "blob:"],
+//             childSrc: ["blob:"],
+//             objectSrc: [],
+//             imgSrc: [
+//                 "'self'",
+//                 "blob:",
+//                 "data:",
+//                 "https://res.cloudinary.com/douqbebwk/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! 
+//                 "https://images.unsplash.com",
+//             ],
+//             fontSrc: ["'self'", ...fontSrcUrls],
+//         },
+//     })
+// );
 
 
 app.use(passport.initialize());
